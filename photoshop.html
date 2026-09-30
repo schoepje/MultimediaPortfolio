@@ -71,109 +71,107 @@
             color: #7ed321; /* Light green accent on hover/active */
         }
 
-        /* Header Banner (Slideshow with Auto Box Size Correction) */
-        .banner-slideshow {
-            width: 100%;
-            height: 350px;
-            margin-top: 20px;
-            border-radius: 8px;
-            overflow: hidden;
-            position: relative;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
-            background-color: #111111; /* Fallback background color */
-        }
-
-        .slides {
-            display: flex;
-            width: 400%; /* Adjusted to 400% for 4 images */
-            height: 100%;
-            animation: slideAnimation 20s infinite; /* Adjusted duration for 4 images */
-        }
-
-        .slide {
-            width: 25%; /* Adjusted to 25% for 4 images */
-            height: 100%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-
-        .slide img {
-            width: 100%;
-            height: 100%;
-            object-fit: contain; /* AUTOMATIC IMAGE BOX SIZE CORRECTION: Fits completely without stretching */
-        }
-
-        /* Adjusted Keyframes for 4 even slides */
-        @keyframes slideAnimation {
-            0% { transform: translateX(0%); }
-            20% { transform: translateX(0%); }
-            25% { transform: translateX(-25%); }
-            45% { transform: translateX(-25%); }
-            50% { transform: translateX(-50%); }
-            70% { transform: translateX(-50%); }
-            75% { transform: translateX(-75%); }
-            95% { transform: translateX(-75%); }
-            100% { transform: translateX(0%); }
-        }
-
-        /* Main Content Layout */
-        .main-content {
+        /* Profile Block Header */
+        .profile-header {
             margin-top: 30px;
             background-color: #262626; /* Dark gray content card */
             border-radius: 8px;
-            padding: 40px;
+            padding: 30px;
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
             display: flex;
-            gap: 40px;
-            align-items: flex-start;
+            gap: 30px;
+            align-items: center;
         }
 
-        /* Profile Image Column */
         .profile-col {
-            flex: 0 0 250px;
+            flex: 0 0 120px;
         }
 
         .profile-img-container {
             width: 100%;
-            aspect-ratio: 1 / 1; /* Enforces a perfect square container */
+            aspect-ratio: 1 / 1;
             border-radius: 50%;
             overflow: hidden;
-            border: 4px solid #7ed321; /* Light green accent border */
+            border: 3px solid #7ed321;
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
         }
 
         .profile-img {
             width: 100%;
             height: 100%;
-            object-fit: cover; /* AUTOMATIC IMAGE SIZE CORRECTION: Fills perfectly without distortion */
-        }
-
-        /* Bio/Paragraphs Column */
-        .bio-col {
-            flex: 1;
+            object-fit: cover;
         }
 
         .bio-col h1 {
             color: #7ed321;
-            margin-bottom: 20px;
             font-size: 2rem;
-            border-bottom: 1px solid #404040;
-            padding-bottom: 10px;
         }
 
-        .bio-paragraph {
-            background-color: #1f1f1f;
+        /* Alternating Content Grid Rows */
+        .work-grid {
+            margin-top: 40px;
+            display: flex;
+            flex-direction: column;
+            gap: 40px;
+        }
+
+        .work-row {
+            display: flex;
+            background-color: #262626;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+            align-items: stretch; /* Enforces equal height matching between image and text block */
+        }
+
+        /* Target every second row to reverse the order automatically */
+        .work-row:nth-child(even) {
+            flex-direction: row-reverse;
+        }
+
+        /* Image Wrapper adjusted for fluid matching image heights */
+        .work-image-wrapper {
+            flex: 1;
+            background-color: #111111;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .work-image-wrapper img {
+            width: 100%;
+            height: auto;
+            max-height: 100%;
+            display: block;
+        }
+
+        /* Text Block Styling */
+        .work-text-block {
+            flex: 1;
+            padding: 40px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center; /* Vertical center alignment for text context */
+        }
+
+        /* Dynamic left border on odd rows, right border on even rows */
+        .work-row:nth-child(odd) .work-text-block {
             border-left: 4px solid #7ed321;
-            padding: 20px;
-            margin-bottom: 20px;
-            border-radius: 0 8px 8px 0;
-            font-size: 1.05rem;
         }
 
-        .placeholder-text {
-            color: #aaaaaa;
-            font-style: italic;
+        .work-row:nth-child(even) .work-text-block {
+            border-right: 4px solid #7ed321;
+        }
+
+        .work-text-block h2 {
+            color: #7ed321;
+            margin-bottom: 15px;
+            font-size: 1.5rem;
+        }
+
+        .work-text-block p {
+            color: #dddddd;
+            font-size: 1.05rem;
         }
 
         /* Responsive Design */
@@ -187,23 +185,30 @@
                 justify-content: center;
                 gap: 15px;
             }
-            .banner-slideshow {
-                height: 200px;
-            }
-            .main-content {
+            .profile-header {
                 flex-direction: column;
-                align-items: center;
                 text-align: center;
                 padding: 20px;
             }
             .profile-col {
-                flex: 0 0 auto;
-                width: 200px;
+                width: 120px;
             }
-            .bio-paragraph {
+            /* Stack images on top of text for mobile screens */
+            .work-row, .work-row:nth-child(even) {
+                flex-direction: column;
+            }
+            .work-image-wrapper {
+                width: 100%;
+            }
+            .work-text-block {
+                width: 100%;
+                padding: 25px;
+            }
+            .work-row:nth-child(odd) .work-text-block,
+            .work-row:nth-child(even) .work-text-block {
                 border-left: none;
+                border-right: none;
                 border-top: 4px solid #7ed321;
-                border-radius: 0 0 8px 8px;
             }
         }
     </style>
@@ -223,40 +228,65 @@
     </nav>
 
     <div class="container">
-        <!-- Header Banner Slideshow with 4 images -->
-        <div class="banner-slideshow">
-            <div class="slides">
-                <div class="slide">
-                    <img src="SocialMediaPost1.png".jpg" alt="Photoshop Artwork 1">
-                </div>
-                <div class="slide">
-                    <img src="SocialMediaPost2.png" alt="Photoshop Artwork 2">
-                </div>
-                <div class="slide">
-                    <img src="SocialMediaPost3.png" alt="Photoshop Artwork 3">
-                </div>
-                <div class="slide">
-                    <img src="SocialMediaPost4.png" alt="Photoshop Artwork 4">
-                </div>
-            </div>
-        </div>
-
-        <!-- Main Content -->
-        <main class="main-content">
+        <!-- Top Profile Intro Header -->
+        <header class="profile-header">
             <div class="profile-col">
                 <div class="profile-img-container">
-                    <!-- Replace with your actual profile image filename if needed -->
-                    <img src="profile.jpg" alt="Profile Image" class="profile-img">
+                    <img src="SocialMediaPost2.png" alt="Profile Image" class="profile-img">
                 </div>
             </div>
-            
             <div class="bio-col">
                 <h1>My Photoshop Work</h1>
-                
-                <!-- Empty paragraph block left open for your personal text -->
-                <p class="bio-paragraph"></p>
-                
             </div>
+        </header>
+
+        <!-- Main Alternating Layout Section -->
+        <main class="work-grid">
+            
+            <!-- Row 1: Image Left, Text Right -->
+            <section class="work-row">
+                <div class="work-image-wrapper">
+                    <img src="SocialMediaPost1.png" alt="Photoshop Artwork 1">
+                </div>
+                <div class="work-text-block">
+                    <h2>Boots and Ball Gowns</h2>
+                    <p>This image uses a combination of images through layering with an overlay of text to inform people about the Homecoming dance.</p>
+                </div>
+            </section>
+
+            <!-- Row 2: Text Left, Image Right -->
+            <section class="work-row">
+                <div class="work-image-wrapper">
+                    <img src="SocialMediaPost2.png" alt="Photoshop Artwork 2">
+                </div>
+                <div class="work-text-block">
+                    <h2>Dodgeball</h2>
+                    <p>This image explains Vista Dodgeball day through image and text layering. It also incorporates text curve as a fun element to show the idea of the poster</p>
+                </div>
+            </section>
+
+            <!-- Row 3: Image Left, Text Right -->
+            <section class="work-row">
+                <div class="work-image-wrapper">
+                    <img src="SocialMediaPost3.png" alt="Photoshop Artwork 3">
+                </div>
+                <div class="work-text-block">
+                    <h2>Camo Dress Up day</h2>
+                    <p>This image is used to show the Vista's Camo dress up day through image layering and positioning in a way that shows the idea without directly explaining. It also gives details through text/image layering.</p>
+                </div>
+            </section>
+
+            <!-- Row 4: Text Left, Image Right -->
+            <section class="work-row">
+                <div class="work-image-wrapper">
+                    <img src="SocialMediaPost4.png" alt="Photoshop Artwork 4">
+                </div>
+                <div class="work-text-block">
+                    <h2>Taste Of Vista</h2>
+                    <p>This image uses image layering to create a collage of restraunts to show the tast of Vista experience through text layering.</p>
+                </div>
+            </section>
+
         </main>
     </div>
 
