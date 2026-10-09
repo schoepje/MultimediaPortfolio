@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Photoshop Portfolio</title>
+    <style>
+        /* Base Reset & Core Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #4a1d00, #8b3d00); /* Dark orange gradient background */
+            color: #ffffff; /* Crisp white text */
+            min-height: 100vh;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* Navigation Bar */
+        nav {
+            background-color: #1a1a1a;
+            border-bottom: 3px solid #7ed321; /* Lighter green accent */
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .nav-container {
+            max-width: 1100px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 20px;
+        }
+
+        .logo {
+            font-size: 1.4rem;
+            font-weight: bold;
+            color: #7ed321; /* Lighter green accent */
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 20px;
+        }
+
+        .nav-links a {
+            color: #ffffff;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.95rem;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a:hover, 
+        .nav-links a.active {
+            color: #7ed321; /* Light green accent on hover/active */
+        }
+
+        /* Profile Block Header */
+        .profile-header {
+            margin-top: 30px;
+            background-color: #262626; /* Dark gray content card */
+            border-radius: 8px;
+            padding: 30px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+            display: flex;
+            gap: 30px;
+            align-items: center;
+        }
+
+        .profile-col {
+            flex: 0 0 120px;
+        }
+
+        .profile-img-container {
+            width: 100%;
+            aspect-ratio: 1 / 1;
+            border-radius: 50%;
+            overflow: hidden;
+            border: 3px solid #7ed321;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        .profile-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .bio-col h1 {
+            color: #7ed321;
+            font-size: 2rem;
+        }
+
+        /* Alternating Content Grid Rows */
+        .work-grid {
+            margin-top: 40px;
+            display: flex;
+            flex-direction: column;
+            gap: 40px;
+        }
+
+        .work-row {
+            display: flex;
+            background-color: #262626;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+            align-items: stretch; /* Enforces equal height matching between image and text block */
+        }
+
+        /* Target every second row to reverse the order automatically */
+        .work-row:nth-child(even) {
+            flex-direction: row-reverse;
+        }
+
+        /* Image Wrapper adjusted for fluid matching image heights */
+        .work-image-wrapper {
+            flex: 1;
+            background-color: #111111;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .work-image-wrapper img {
+            width: 100%;
+            height: auto;
+            max-height: 100%;
+            display: block;
+        }
+
+        /* Text Block Styling */
+        .work-text-block {
+            flex: 1;
+            padding: 40px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center; /* Vertical center alignment for text context */
+        }
+
+        /* Dynamic left border on odd rows, right border on even rows */
+        .work-row:nth-child(odd) .work-text-block {
+            border-left: 4px solid #7ed321;
+        }
+
+        .work-row:nth-child(even) .work-text-block {
+            border-right: 4px solid #7ed321;
+        }
+
+        .work-text-block h2 {
+            color: #7ed321;
+            margin-bottom: 15px;
+            font-size: 1.5rem;
+        }
+
+        .work-text-block p {
+            color: #dddddd;
+            font-size: 1.05rem;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .nav-container {
+                flex-direction: column;
+                gap: 15px;
+            }
+            .nav-links {
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 15px;
+            }
+            .profile-header {
+                flex-direction: column;
+                text-align: center;
+                padding: 20px;
+            }
+            .profile-col {
+                width: 120px;
+            }
+            /* Stack images on top of text for mobile screens */
+            .work-row, .work-row:nth-child(even) {
+                flex-direction: column;
+            }
+            .work-image-wrapper {
+                width: 100%;
+            }
+            .work-text-block {
+                width: 100%;
+                padding: 25px;
+            }
+            .work-row:nth-child(odd) .work-text-block,
+            .work-row:nth-child(even) .work-text-block {
+                border-left: none;
+                border-right: none;
+                border-top: 4px solid #7ed321;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <div class="nav-container">
+            <div class="logo">Portfolio</div>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="photoshop.html" >Photoshop</a></li>
+                <li><a href="Illustrator.html" class="active">Illustrator</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="contact.html">Contact</a></li>
+                
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container">
+        <!-- Top Profile Intro Header -->
+        <header class="profile-header">
+            <div class="profile-col">
+                <div class="profile-img-container">
+                    <img src="Pumpkin.png" alt="Profile Image" class="profile-img">
+                </div>
+            </div>
+            <div class="bio-col">
+                <h1>My Photoshop Work</h1>
+            </div>
+        </header>
+
+        <!-- Main Alternating Layout Section -->
+        <main class="work-grid">
+            
+            <!-- Row 1: Image Left, Text Right -->
+            <section class="work-row">
+                <div class="work-image-wrapper">
+                    <img src="Lebron.jpg" alt="Photoshop Artwork 1">
+                </div>
+                <div class="work-text-block">
+                    <h2>Lebron</h2>
+                    <p>This image shows digital effects trough the blob brush tool to give an image of Lebron a more exciting setting.</p>
+                </div>
+            </section>
+
+            <!-- Row 2: Text Left, Image Right -->
+            <section class="work-row">
+                <div class="work-image-wrapper">
+                    <img src="Backrooms.png" alt="Photoshop Artwork 2">
+                </div>
+                <div class="work-text-block">
+                    <h2>Backrooms</h2>
+                    <p>A recreation of the backrooms movie shown through simple images to create a recognizable setting and theme.</p>
+                </div>
+            </section>
+
+            <!-- Row 3: Image Left, Text Right -->
+            <section class="work-row">
+                <div class="work-image-wrapper">
+                    <img src="Rhino.png" alt="Photoshop Artwork 3">
+                </div>
+                <div class="work-text-block">
+                    <h2>Rhino</h2>
+                    <p>Recreation of a recognizable rhino useing minamilist shapes and colors to create a great design.</p>
+                </div>
+            </section>
+
+            <!-- Row 4: Text Left, Image Right -->
+            <section class="work-row">
+                <div class="work-image-wrapper">
+                    <img src="Pumpkin.png" alt="Photoshop Artwork 4">
+                </div>
+                <div class="work-text-block">
+                    <h2>Pumpkin</h2>
+                    <p>A pumpkin created through object layering and coloring to recreate a pumpkin through simple shapes.</p>
+                </div>
+            </section>
+
+        </main>
+    </div>
+
+</body>
+</html>
