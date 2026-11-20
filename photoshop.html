@@ -3,213 +3,60 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Photoshop Portfolio</title>
+    <title>Premiere Pro Portfolio</title>
     <style>
-        /* Base Reset & Core Styles */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
+        * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #4a1d00, #8b3d00); /* Dark orange gradient background */
-            color: #ffffff; /* Crisp white text */
+            background: linear-gradient(135deg, #4a1d00, #8b3d00);
+            color: #ffffff;
             min-height: 100vh;
             line-height: 1.6;
         }
+        .container { max-width: 1100px; margin: 0 auto; padding: 20px; }
 
-        .container {
-            max-width: 1100px;
-            margin: 0 auto;
-            padding: 20px;
-        }
+        /* Navigation */
+        nav { background: #1a1a1a; border-bottom: 3px solid #7ed321; position: sticky; top: 0; z-index: 1000; }
+        .nav-container { max-width: 1100px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; padding: 15px 20px; }
+        .logo { font-size: 1.4rem; font-weight: bold; color: #7ed321; text-transform: uppercase; letter-spacing: 1px; }
+        .nav-links { display: flex; list-style: none; gap: 20px; }
+        .nav-links a { color: #ffffff; text-decoration: none; font-weight: 600; font-size: 0.95rem; transition: color 0.3s; }
+        .nav-links a:hover, .nav-links a.active { color: #7ed321; }
 
-        /* Navigation Bar */
-        nav {
-            background-color: #1a1a1a;
-            border-bottom: 3px solid #7ed321; /* Lighter green accent */
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-        }
-
-        .nav-container {
-            max-width: 1100px;
-            margin: 0 auto;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 15px 20px;
-        }
-
-        .logo {
-            font-size: 1.4rem;
-            font-weight: bold;
-            color: #7ed321; /* Lighter green accent */
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-
-        .nav-links {
-            display: flex;
-            list-style: none;
-            gap: 20px;
-        }
-
-        .nav-links a {
-            color: #ffffff;
-            text-decoration: none;
-            font-weight: 600;
-            font-size: 0.95rem;
-            transition: color 0.3s ease;
-        }
-
-        .nav-links a:hover, 
-        .nav-links a.active {
-            color: #7ed321; /* Light green accent on hover/active */
-        }
-
-        /* Profile Block Header */
+        /* Profile Header */
         .profile-header {
-            margin-top: 30px;
-            background-color: #262626; /* Dark gray content card */
-            border-radius: 8px;
-            padding: 30px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
-            display: flex;
-            gap: 30px;
-            align-items: center;
+            margin-top: 30px; background: #262626; border-radius: 8px; padding: 30px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.5); display: flex; gap: 30px; align-items: center;
         }
+        .profile-img { width: 120px; height: 120px; border-radius: 50%; object-fit: cover; border: 3px solid #7ed321; }
+        .bio-col h1 { color: #7ed321; font-size: 2rem; }
 
-        .profile-col {
-            flex: 0 0 120px;
-        }
-
-        .profile-img-container {
-            width: 100%;
-            aspect-ratio: 1 / 1;
-            border-radius: 50%;
-            overflow: hidden;
-            border: 3px solid #7ed321;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
-        }
-
-        .profile-img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-
-        .bio-col h1 {
-            color: #7ed321;
-            font-size: 2rem;
-        }
-
-        /* Alternating Content Grid Rows */
-        .work-grid {
-            margin-top: 40px;
-            display: flex;
-            flex-direction: column;
-            gap: 40px;
-        }
-
+        /* Alternating Video Grid */
+        .work-grid { margin-top: 40px; display: flex; flex-direction: column; gap: 40px; }
         .work-row {
-            display: flex;
-            background-color: #262626;
-            border-radius: 8px;
-            overflow: hidden;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
-            align-items: stretch; /* Enforces equal height matching between image and text block */
+            display: flex; background: #262626; border-radius: 8px; overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.5); align-items: stretch;
         }
+        .work-row:nth-child(even) { flex-direction: row-reverse; }
 
-        /* Target every second row to reverse the order automatically */
-        .work-row:nth-child(even) {
-            flex-direction: row-reverse;
-        }
+        /* 16:9 Video Wrapper */
+        .work-video-wrapper { flex: 1.2; background: #111111; position: relative; aspect-ratio: 16 / 9; min-height: 280px; }
+        .work-video-wrapper iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none; }
 
-        /* Image Wrapper adjusted for fluid matching image heights */
-        .work-image-wrapper {
-            flex: 1;
-            background-color: #111111;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
+        /* Description Block */
+        .work-text-block { flex: 1; padding: 40px; display: flex; flex-direction: column; justify-content: center; }
+        .work-row:nth-child(odd) .work-text-block { border-left: 4px solid #7ed321; }
+        .work-row:nth-child(even) .work-text-block { border-right: 4px solid #7ed321; }
+        .work-text-block h2 { color: #7ed321; margin-bottom: 15px; font-size: 1.5rem; }
+        .work-text-block p { color: #dddddd; font-size: 1.05rem; }
 
-        .work-image-wrapper img {
-            width: 100%;
-            height: auto;
-            max-height: 100%;
-            display: block;
-        }
-
-        /* Text Block Styling */
-        .work-text-block {
-            flex: 1;
-            padding: 40px;
-            display: flex;
-            flex-direction: column;
-            justify-content: center; /* Vertical center alignment for text context */
-        }
-
-        /* Dynamic left border on odd rows, right border on even rows */
-        .work-row:nth-child(odd) .work-text-block {
-            border-left: 4px solid #7ed321;
-        }
-
-        .work-row:nth-child(even) .work-text-block {
-            border-right: 4px solid #7ed321;
-        }
-
-        .work-text-block h2 {
-            color: #7ed321;
-            margin-bottom: 15px;
-            font-size: 1.5rem;
-        }
-
-        .work-text-block p {
-            color: #dddddd;
-            font-size: 1.05rem;
-        }
-
-        /* Responsive Design */
+        /* Mobile Responsive */
         @media (max-width: 768px) {
-            .nav-container {
-                flex-direction: column;
-                gap: 15px;
-            }
-            .nav-links {
-                flex-wrap: wrap;
-                justify-content: center;
-                gap: 15px;
-            }
-            .profile-header {
-                flex-direction: column;
-                text-align: center;
-                padding: 20px;
-            }
-            .profile-col {
-                width: 120px;
-            }
-            /* Stack images on top of text for mobile screens */
-            .work-row, .work-row:nth-child(even) {
-                flex-direction: column;
-            }
-            .work-image-wrapper {
-                width: 100%;
-            }
-            .work-text-block {
-                width: 100%;
-                padding: 25px;
-            }
-            .work-row:nth-child(odd) .work-text-block,
-            .work-row:nth-child(even) .work-text-block {
-                border-left: none;
-                border-right: none;
-                border-top: 4px solid #7ed321;
-            }
+            .nav-container, .profile-header { flex-direction: column; text-align: center; gap: 15px; }
+            .nav-links { flex-wrap: wrap; justify-content: center; }
+            .work-row, .work-row:nth-child(even) { flex-direction: column; }
+            .work-video-wrapper { width: 100%; min-height: 220px; }
+            .work-text-block { padding: 25px; border-left: none !important; border-right: none !important; border-top: 4px solid #7ed321; }
         }
     </style>
 </head>
@@ -220,8 +67,9 @@
             <div class="logo">Portfolio</div>
             <ul class="nav-links">
                 <li><a href="index.html">Home</a></li>
-                <li><a href="photoshop.html" class="active">Photoshop</a></li>
-                <li><a href="Illustrator.html" >Illustrator</a></li>
+                <li><a href="photoshop.html">Photoshop</a></li>
+                <li><a href="Illustrator.html">Illustrator</a></li>
+                <li><a href="premiere.html" class="active">Premiere Pro</a></li>
                 <li><a href="about.html">About</a></li>
                 <li><a href="contact.html">Contact</a></li>
             </ul>
@@ -229,65 +77,35 @@
     </nav>
 
     <div class="container">
-        <!-- Top Profile Intro Header -->
         <header class="profile-header">
-            <div class="profile-col">
-                <div class="profile-img-container">
-                    <img src="SocialMediaPost2.png" alt="Profile Image" class="profile-img">
-                </div>
-            </div>
+            <img src="SocialMediaPost2.png" alt="Profile Image" class="profile-img">
             <div class="bio-col">
-                <h1>My Photoshop Work</h1>
+                <h1>My Premiere Pro Work</h1>
             </div>
         </header>
 
-        <!-- Main Alternating Layout Section -->
         <main class="work-grid">
-            
-            <!-- Row 1: Image Left, Text Right -->
+            <!-- Video 1 -->
             <section class="work-row">
-                <div class="work-image-wrapper">
-                    <img src="SocialMediaPost1.png" alt="Photoshop Artwork 1">
+                <div class="work-video-wrapper">
+                    <iframe src="https://google.com" loading="lazy" allow="autoplay" allowfullscreen></iframe>
                 </div>
                 <div class="work-text-block">
-                    <h2>Boots and Ball Gowns</h2>
-                    <p>This image uses a combination of images through layering with an overlay of text to inform people about the Homecoming dance.</p>
+                    <h2>Video Project 1</h2>
+                    <p>Sentence 1 describing the video project and its concept. Sentence 2 explaining the Premiere Pro editing techniques, transitions, or audio work used.</p>
                 </div>
             </section>
 
-            <!-- Row 2: Text Left, Image Right -->
+            <!-- Video 2 -->
             <section class="work-row">
-                <div class="work-image-wrapper">
-                    <img src="SocialMediaPost2.png" alt="Photoshop Artwork 2">
+                <div class="work-video-wrapper">
+                    <iframe src="https://google.com" loading="lazy" allow="autoplay" allowfullscreen></iframe>
                 </div>
                 <div class="work-text-block">
-                    <h2>Dodgeball</h2>
-                    <p>This image explains Vista Dodgeball day through image and text layering. It also incorporates text curve as a fun element to show the idea of the poster</p>
+                    <h2>Video Project 2</h2>
+                    <p>Sentence 1 describing the second video project and its purpose. Sentence 2 highlighting specific effects, pacing, or color grading applied in Premiere Pro.</p>
                 </div>
             </section>
-
-            <!-- Row 3: Image Left, Text Right -->
-            <section class="work-row">
-                <div class="work-image-wrapper">
-                    <img src="SocialMediaPost3.png" alt="Photoshop Artwork 3">
-                </div>
-                <div class="work-text-block">
-                    <h2>Camo Dress Up day</h2>
-                    <p>This image is used to show the Vista's Camo dress up day through image layering and positioning in a way that shows the idea without directly explaining. It also gives details through text/image layering.</p>
-                </div>
-            </section>
-
-            <!-- Row 4: Text Left, Image Right -->
-            <section class="work-row">
-                <div class="work-image-wrapper">
-                    <img src="SocialMediaPost4.png" alt="Photoshop Artwork 4">
-                </div>
-                <div class="work-text-block">
-                    <h2>Taste Of Vista</h2>
-                    <p>This image uses image layering to create a collage of restraunts to show the tast of Vista experience through text layering.</p>
-                </div>
-            </section>
-
         </main>
     </div>
 
